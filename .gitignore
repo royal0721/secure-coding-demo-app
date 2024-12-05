@@ -1,0 +1,58 @@
+# Node.js modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Coverage reports
+coverage/
+
+# Build output
+dist/
+build/
+
+# Dependency directories
+bower_components/
+
+# Ignore package-lock and yarn.lock if using only one package manager
+# Uncomment the one you don't use
+# package-lock.json
+# yarn.lock
+
+# Cache
+.nyc_output/
+.cache/
+
+# Test results
+*.out
+*.test-report
+junit.xml
+test-results.xml
+
+# Miscellaneous
+*.pid
+*.seed
+*.pid.lock
