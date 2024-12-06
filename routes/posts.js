@@ -12,6 +12,6 @@ const { checkPermission } = require('../middleware/checkPermission');
 router.get('/', verifyJWT, checkPermission('read_post'), getAllPosts);
 router.post('/', verifyJWT, checkPermission('create_post'), createPost);
 router.put('/:id', verifyJWT, checkPermission('update_post'), updatePost);
-router.delete('/:id', verifyJWT, checkPermission('delete_record'), deletePost);
+router.delete('/:id', verifyJWT, checkPermission('delete_post'), deletePost);
 
 module.exports = router;
