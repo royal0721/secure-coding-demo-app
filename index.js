@@ -1,16 +1,27 @@
-require('dotenv').config();
+const dotenv = require('dotenv');
+
+dotenv.config({ path: `.env.${process.env.NODE_ENV || 'development'}` });
+
 const express = require('express');
 const bodyParser = require('body-parser');
+
+const indexRoutes = require('./routes/index');
+
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/posts');
-const errorHandler = require('./middleware/errorHandler');
+
+const { errorHandler } = require('./middlewares/error.middleware');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
-// 中間件
+// middleware
 app.use(bodyParser.json());
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // 路由
+app.use('/csrf', indexRoutes);
+
 app.use('/auth', authRoutes); // 認證路由
 app.use('/posts', postRoutes); // 保護的記錄路由
 

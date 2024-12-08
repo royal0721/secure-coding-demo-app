@@ -1,22 +1,27 @@
-require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const logService = require('../services/logService');
+const logService = require('../services/log.service');
 
 exports.registerUser = async (req, res) => {
   const { username, password, roleId } = req.body;
 
   try {
+    // 檢查用戶是否存在
+    const existingUser = await User.findByUsername(username);
+    if (existingUser) {
+      return res.status(400).json({ error: '註冊錯誤' }); // 統一錯誤訊息
+    }
+
     // 加密密碼
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // 創建用戶
     await User.create(username, hashedPassword, roleId);
 
-    res.status(201).json({ message: 'User registered successfully' });
+    res.status(201).json({ message: '註冊成功' });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: '註冊錯誤' }); // 統一錯誤訊息
   }
 };
 

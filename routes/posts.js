@@ -5,9 +5,11 @@ const {
   createPost,
   updatePost,
   deletePost,
-} = require('../controllers/postsController');
-const { verifyJWT } = require('../middleware/verifyJWT');
-const { checkPermission } = require('../middleware/checkPermission');
+} = require('../controllers/posts.controller');
+const { verifyJWT } = require('../middlewares/verifyJWT.middleware');
+const {
+  checkPermission,
+} = require('../middlewares/checkPermission.middleware');
 
 router.get('/', verifyJWT, checkPermission('read_post'), getAllPosts);
 router.post('/', verifyJWT, checkPermission('create_post'), createPost);

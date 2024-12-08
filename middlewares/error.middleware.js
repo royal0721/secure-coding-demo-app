@@ -1,7 +1,19 @@
-const logService = require('../services/logService');
+const logService = require('../services/log.service');
+
+const { invalidCsrfTokenError } = require('csrf-csrf');
+
+// 處理 CSRF 錯誤
+const csrfErrorHandler = (err, req, res, next) => {
+  if (err === invalidCsrfTokenError) {
+    return res.status(403).json({ error: 'CSRF validation failed' });
+  }
+  next(err);
+};
 
 // 錯誤處理中間件
 const errorHandler = (err, req, res, next) => {
+  // 那這邊的Logger不用嗎？
+  // 不用加密？
   // 記錄錯誤資訊
   logService.error(`錯誤訊息: ${err.message}`);
   logService.error(`錯誤堆疊: ${err.stack}`);
@@ -21,4 +33,4 @@ const errorHandler = (err, req, res, next) => {
   });
 };
 
-module.exports = errorHandler;
+module.exports = { csrfErrorHandler, errorHandler };

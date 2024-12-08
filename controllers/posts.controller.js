@@ -1,3 +1,5 @@
+const { body, validationResult } = require('express-validator');
+
 const Post = require('../models/post');
 
 const postsController = {
@@ -12,20 +14,33 @@ const postsController = {
   },
 
   // 創建新記錄
-  createPost: async (req, res) => {
-    const { name } = req.body;
+  createPost: [
+    // 驗證和清理輸入
+    body('name')
+      .trim() // 移除前後空白
+      .isLength({ min: 3, max: 50 }) // 限制名稱長度
+      .withMessage('Name must be between 3 and 50 characters')
+      .matches(/^[a-zA-Z0-9\s]+$/) // 僅允許字母、數字和空格
+      .withMessage('Name can only contain letters, numbers, and spaces'),
+    // Controller 主邏輯
+    async (req, res) => {
+      // 檢查驗證結果
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
 
-    if (!name) {
-      return res.status(400).json({ error: 'Name is required' });
-    }
+      const { name } = req.body;
 
-    try {
-      const postId = await Post.create(name);
-      res.status(201).json({ id: postId, name });
-    } catch (err) {
-      res.status(500).json({ error: 'Failed to create post' });
-    }
-  },
+      try {
+        // 模擬創建記錄的功能（替換為你的實際數據庫操作）
+        const postId = await Post.create(name); // 假設 Post.create 是一個 Promise
+        res.status(201).json({ id: postId, name });
+      } catch (err) {
+        res.status(500).json({ error: 'Failed to create post' });
+      }
+    },
+  ],
 
   // 更新記錄
   updatePost: async (req, res) => {
