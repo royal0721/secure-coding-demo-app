@@ -9,7 +9,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # Environment variables
-.env
+.env.development
+.env.production
 .env.local
 .env.*.local
 
