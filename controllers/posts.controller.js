@@ -9,7 +9,7 @@ const postsController = {
       const posts = await Post.getAll();
       res.status(200).json(posts);
     } catch (err) {
-      res.status(500).json({ error: 'Failed to retrieve posts' });
+      res.status(500).json({ error: '無法取得貼文' });
     }
   },
 
@@ -19,9 +19,9 @@ const postsController = {
     body('name')
       .trim() // 移除前後空白
       .isLength({ min: 3, max: 50 }) // 限制名稱長度
-      .withMessage('Name must be between 3 and 50 characters')
+      .withMessage('名稱必須介於 3 到 50 個字元之間')
       .matches(/^[a-zA-Z0-9\s]+$/) // 僅允許字母、數字和空格
-      .withMessage('Name can only contain letters, numbers, and spaces'),
+      .withMessage('名稱只能包含字母、數字和空格'),
     // Controller 主邏輯
     async (req, res) => {
       // 檢查驗證結果
@@ -33,11 +33,10 @@ const postsController = {
       const { name } = req.body;
 
       try {
-        // 模擬創建記錄的功能（替換為你的實際數據庫操作）
-        const postId = await Post.create(name); // 假設 Post.create 是一個 Promise
+        const postId = await Post.create(name);
         res.status(201).json({ id: postId, name });
       } catch (err) {
-        res.status(500).json({ error: 'Failed to create post' });
+        res.status(500).json({ error: '建立貼文失敗' });
       }
     },
   ],
@@ -55,12 +54,12 @@ const postsController = {
       const affectedRows = await Post.update(id, name);
 
       if (affectedRows === 0) {
-        return res.status(404).json({ error: 'Post not found' });
+        return res.status(404).json({ error: '貼文未找到' });
       }
 
-      res.status(200).json({ message: 'Post updated successfully' });
+      res.status(200).json({ message: '貼文成功被更新' });
     } catch (err) {
-      res.status(500).json({ error: 'Failed to update post' });
+      res.status(500).json({ error: '更新貼文失敗' });
     }
   },
 
@@ -72,12 +71,12 @@ const postsController = {
       const affectedRows = await Post.delete(id);
 
       if (affectedRows === 0) {
-        return res.status(404).json({ error: 'Post not found' });
+        return res.status(404).json({ error: '貼文不存在' });
       }
 
-      res.status(200).json({ message: 'Post deleted successfully' });
+      res.status(200).json({ message: '貼文已成功刪除' });
     } catch (err) {
-      res.status(500).json({ error: 'Failed to delete post' });
+      res.status(500).json({ error: '刪除貼文失敗' });
     }
   },
 };

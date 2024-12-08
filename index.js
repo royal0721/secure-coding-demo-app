@@ -13,6 +13,8 @@ const postRoutes = require('./routes/posts');
 const { errorHandler } = require('./middlewares/error.middleware');
 const cookieParser = require('cookie-parser');
 
+const logService = require('./services/log.service');
+
 const app = express();
 
 // middleware
@@ -43,5 +45,5 @@ process.on('unhandledRejection', (reason, promise) => {
 // 啟動服務器
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`伺服器正在執行於埠號 ${PORT}`);
 });

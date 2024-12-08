@@ -5,7 +5,7 @@ const { invalidCsrfTokenError } = require('csrf-csrf');
 // 處理 CSRF 錯誤
 const csrfErrorHandler = (err, req, res, next) => {
   if (err === invalidCsrfTokenError) {
-    return res.status(403).json({ error: 'CSRF validation failed' });
+    return res.status(403).json({ error: 'CSRF驗證失敗' });
   }
   next(err);
 };

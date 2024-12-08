@@ -9,7 +9,7 @@ exports.checkPermission = (permission) => {
     if (permissions.includes(permission)) {
       next();
     } else {
-      res.status(403).json({ error: 'Access denied' });
+      res.status(403).json({ error: '存取被拒絕' });
     }
   };
 };
