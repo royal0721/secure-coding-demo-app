@@ -6,14 +6,24 @@ const {
   updatePost,
   deletePost,
 } = require('../controllers/posts.controller');
-const { verifyJWT } = require('../middlewares/verifyJWT.middleware');
+const { verifyAccessToken } = require('../middlewares/auth.middleware');
 const {
   checkPermission,
 } = require('../middlewares/checkPermission.middleware');
 
-router.get('/', verifyJWT, checkPermission('read_post'), getAllPosts);
-router.post('/', verifyJWT, checkPermission('create_post'), createPost);
-router.put('/:id', verifyJWT, checkPermission('update_post'), updatePost);
-router.delete('/:id', verifyJWT, checkPermission('delete_post'), deletePost);
+router.get('/', verifyAccessToken, checkPermission('read_post'), getAllPosts);
+router.post('/', verifyAccessToken, checkPermission('create_post'), createPost);
+router.put(
+  '/:id',
+  verifyAccessToken,
+  checkPermission('update_post'),
+  updatePost
+);
+router.delete(
+  '/:id',
+  verifyAccessToken,
+  checkPermission('delete_post'),
+  deletePost
+);
 
 module.exports = router;

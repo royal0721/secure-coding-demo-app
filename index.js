@@ -6,16 +6,27 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const indexRoutes = require('./routes/index');
-
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/posts');
 
 const { errorHandler } = require('./middlewares/error.middleware');
 const cookieParser = require('cookie-parser');
 
+const cors = require('cors'); // 引入 CORS 中間件
+
 const logService = require('./services/log.service');
 
 const app = express();
+
+// 配置CORS (如果沒有設置Nginx，可以把註解的地方去掉，使用這個進行測試)
+// 注意，若未設置Nginx，這個設置CSRF會驗證不通過
+app.use(
+  cors({
+    // origin: 'http://localhost:4200', // 允許來自 Angular 客戶端的請求 (請讀者自行替換)
+    // methods: ['GET', 'POST', 'PUT', 'DELETE'], // 允許的 HTTP 方法
+    credentials: true, // 是否允許攜帶 cookie 等憑證
+  })
+);
 
 // middleware
 app.use(bodyParser.json());

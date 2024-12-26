@@ -24,6 +24,7 @@
     "express-validator": "^7.2.0",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.11.5",
+    "uuid": "^11.0.3",
     "winston": "^3.17.0"
   },
   "devDependencies": {
