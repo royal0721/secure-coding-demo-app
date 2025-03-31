@@ -1,5 +1,5 @@
-const db = require('../config/db'); // 假設 db 是 mysql2 的連線實例
-const { v4: uuidv4 } = require('uuid');
+const db = require("../config/db"); // 假設 db 是 mysql2 的連線實例
+const { v4: uuidv4 } = require("uuid");
 
 const RefreshToken = {
   // 生成 Refresh Token
@@ -19,21 +19,21 @@ const RefreshToken = {
 
   // 驗證 Refresh Token
   async verifyToken(token) {
-    const query = 'SELECT * FROM refreshTokens WHERE token = ?';
+    const query = "SELECT * FROM refreshTokens WHERE token = ?";
     const [rows] = await db.query(query, [token]);
 
     if (rows.length === 0) {
-      throw new Error('Refresh Token not found');
+      throw new Error("Refresh Token not found");
     }
 
     const refreshToken = rows[0];
 
     if (refreshToken.isRevoked) {
-      throw new Error('Refresh Token has been revoked');
+      throw new Error("Refresh Token has been revoked");
     }
 
     if (new Date(refreshToken.expiryDate) < new Date()) {
-      throw new Error('Refresh Token has expired');
+      throw new Error("Refresh Token has expired");
     }
 
     return refreshToken;
@@ -41,7 +41,7 @@ const RefreshToken = {
 
   // 撤銷 Refresh Token
   async revokeToken(token) {
-    const query = 'UPDATE refreshTokens SET isRevoked = TRUE WHERE token = ?';
+    const query = "UPDATE refreshTokens SET isRevoked = TRUE WHERE token = ?";
     await db.query(query, [token]);
   },
 };

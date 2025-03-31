@@ -1,28 +1,31 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const {
+  getPostById,
   getAllPosts,
   createPost,
   updatePost,
   deletePost,
-} = require('../controllers/posts.controller');
-const { verifyAccessToken } = require('../middlewares/auth.middleware');
+} = require("../controllers/posts.controller");
+const { verifyAccessToken } = require("../middlewares/auth.middleware");
 const {
   checkPermission,
-} = require('../middlewares/checkPermission.middleware');
+} = require("../middlewares/checkPermission.middleware");
 
-router.get('/', verifyAccessToken, checkPermission('read_post'), getAllPosts);
-router.post('/', verifyAccessToken, checkPermission('create_post'), createPost);
+router.get("/", verifyAccessToken, checkPermission("read_post"), getAllPosts);
+router.get("/:id", verifyAccessToken, getPostById);
+
+router.post("/", verifyAccessToken, checkPermission("create_post"), createPost);
 router.put(
-  '/:id',
+  "/:id",
   verifyAccessToken,
-  checkPermission('update_post'),
+  checkPermission("update_post"),
   updatePost
 );
 router.delete(
-  '/:id',
+  "/:id",
   verifyAccessToken,
-  checkPermission('delete_post'),
+  checkPermission("delete_post"),
   deletePost
 );
 

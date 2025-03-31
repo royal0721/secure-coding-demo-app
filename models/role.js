@@ -1,9 +1,9 @@
-const db = require('../config/db');
+const db = require("../config/db");
 
 class Role {
   static async findByName(name) {
-    const query = 'SELECT * FROM roles WHERE name = ?';
-    const [rows] = await db.promise().query(query, [name]);
+    const query = "SELECT * FROM roles WHERE name = ?";
+    const [rows] = await db.query(query, [name]);
     return rows[0];
   }
 
@@ -13,7 +13,7 @@ class Role {
       JOIN role_permissions rp ON p.id = rp.permission_id
       WHERE rp.role_id = ?
     `;
-    const [rows] = await db.promise().query(query, [roleId]);
+    const [rows] = await db.query(query, [roleId]);
     return rows.map((row) => row.name);
   }
 }
