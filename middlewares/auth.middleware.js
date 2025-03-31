@@ -16,7 +16,7 @@ exports.verifyAccessToken = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (err) {
-    res.status(403).json({
+    return res.status(403).json({
       status: "error",
       message: "未授權：Token無效",
     });

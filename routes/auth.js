@@ -11,7 +11,7 @@ router.post("/login", authController.loginUser); // 用戶登錄
 router.post("/refresh", extractRefreshToken, authController.refreshAccessToken); // 刷新 Access Token
 router.post("/logout", extractRefreshToken, authController.revokeRefreshToken); // 撤銷 Refresh Token（登出）
 router.get('/status', verifyAccessToken, (req, res) => {
-    res.status(200).json({ status: "success", loggedIn: true, user: req.user });
+    return res.status(200).json({ status: "success", loggedIn: true, user: req.user });
 });
 
 module.exports = router;

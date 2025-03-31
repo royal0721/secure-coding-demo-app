@@ -5,7 +5,7 @@ const { invalidCsrfTokenError } = require("csrf-csrf");
 // 處理 CSRF 錯誤
 const csrfErrorHandler = (err, req, res, next) => {
   if (err === invalidCsrfTokenError) {
-    return res.status(403).json({ status: "error" , message: "CSRF驗證失敗" });
+    return res.status(403).json({ status: "error", message: "CSRF驗證失敗" });
   }
   next(err);
 };
@@ -17,7 +17,7 @@ const errorHandler = (err, req, res, next) => {
   logService.error(`錯誤堆疊: ${err.stack}`);
 
   // 返回簡化錯誤訊息
-  res.status(500).json({
+  return res.status(500).json({
     status: "error",
     error: "伺服器錯誤，請稍後再試。",
   });

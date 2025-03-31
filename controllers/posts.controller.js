@@ -11,13 +11,13 @@ const postsController = {
       const post = await Post.findById(id);
 
       if (!post) {
-        return res.status(404).json({ message: '找不到貼文' });
+        return res.status(404).json({ status: "error", message: '找不到貼文' });
       }
 
-      res.status(200).json(post);
+      return res.status(200).json(post);
     } catch (err) {
       console.error('取得貼文失敗:', err);
-      res.status(500).json({ message: '伺服器錯誤，無法取得貼文' });
+      return res.status(500).json({ status: "error", message: '伺服器錯誤，無法取得貼文' });
     }
   },
 
@@ -25,9 +25,9 @@ const postsController = {
   getAllPosts: async (req, res) => {
     try {
       const posts = await Post.getAll();
-      res.status(200).json(posts);
+      return res.status(200).json(posts);
     } catch (err) {
-      res.status(500).json({
+      return res.status(500).json({
         status: "error",
         message: "無法取得貼文"
       });
@@ -55,9 +55,9 @@ const postsController = {
 
       try {
         const { id, createdAt } = await Post.create(name);
-        res.status(201).json({ id, name, createdAt });
+        return res.status(201).json({ status: "success", message: "建立貼文成功", id, name, createdAt });
       } catch (err) {
-        res.status(500).json({ status: "error", message: "建立貼文失敗" });
+        return res.status(500).json({ status: "error", message: "建立貼文失敗" });
       }
     },
   ],
@@ -78,9 +78,9 @@ const postsController = {
         return res.status(404).json({ status: "error", message: "貼文未找到" });
       }
 
-      res.status(200).json({ status: "success", message: "貼文成功被更新" });
+      return res.status(200).json({ status: "success", message: "貼文成功被更新" });
     } catch (err) {
-      res.status(500).json({ status: "error", message: "更新貼文失敗" });
+      return res.status(500).json({ status: "error", message: "更新貼文失敗" });
     }
   },
 
@@ -95,9 +95,9 @@ const postsController = {
         return res.status(404).json({ status: "error", message: "貼文不存在" });
       }
 
-      res.status(200).json({ status: "success", message: "貼文已成功刪除" });
+      return res.status(200).json({ status: "success", message: "貼文已成功刪除" });
     } catch (err) {
-      res.status(500).json({ status: "success", message: "刪除貼文失敗" });
+      return res.status(500).json({ status: "success", message: "刪除貼文失敗" });
     }
   },
 };
