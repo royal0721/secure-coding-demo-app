@@ -14,7 +14,7 @@ const csrfErrorHandler = (err, req, res, next) => {
 const errorHandler = (err, req, res, next) => {
   // 記錄錯誤資訊
   logService.error(`錯誤訊息: ${err.message}`);
-  logService.error(`錯誤堆疊: ${err.stack}`);
+  logService.error(`錯誤堆疊: ${err.stack}`); // 視環境加上
 
   // 返回簡化錯誤訊息
   return res.status(500).json({

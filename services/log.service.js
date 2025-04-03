@@ -5,7 +5,7 @@ const logFormat = format.combine(
   format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
   // 格式化輸出
   format.printf(
-    ({ timestamp, level, message }) => `${timestamp} [${level}]: ${message}`
+    ({ timestamp, level, message }) => `${String(timestamp)} [${level}]: ${String(message)}`
   )
 );
 // 創建Logger實例

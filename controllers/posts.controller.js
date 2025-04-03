@@ -27,6 +27,7 @@ const postsController = {
       const posts = await Post.getAll();
       return res.status(200).json(posts);
     } catch (err) {
+      logService.error('取得貼文時發生錯誤：', err);
       return res.status(500).json({
         status: "error",
         message: "無法取得貼文"

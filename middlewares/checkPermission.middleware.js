@@ -8,7 +8,7 @@ exports.checkPermission = (permission) => {
     if (isPermitted) {
       next();
     } else {
-      return res.status(403).json({ status: "error", message: "存取被拒絕" });
+      return res.status(403).json({ status: "error", message: "拒絕存取" });
     }
   };
 };

@@ -52,19 +52,19 @@ exports.loginUser = async (req, res) => {
     const maskedUsername = maskUsername(username);
 
     if (!user) {
-      logService.warn(`登入失敗：嘗試的用戶名 (${maskedUsername})`);
+      logService.warn(`登入失敗：嘗試的使用者名稱 (${maskedUsername})`);
       return res
         .status(401)
-        .json({ status: "error", message: "密碼錯誤或用戶不存在" });
+        .json({ status: "error", message: "密碼錯誤或使用者不存在" });
     }
 
     // 驗證密碼
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      logService.warn(`登入失敗：嘗試的用戶名 (${maskedUsername})`);
+      logService.warn(`登入失敗：嘗試的使用者名稱 (${maskedUsername})`);
       return res
         .status(401)
-        .json({ status: "error", message: "密碼錯誤或用戶不存在" });
+        .json({ status: "error", message: "密碼錯誤或使用者不存在" });
     }
 
     // 生成 Access Token 和 Refresh Token
@@ -92,6 +92,7 @@ exports.loginUser = async (req, res) => {
     logService.info(`登入成功：用戶名 (${maskedUsername})`);
     return res.status(200).json({ status: "success", message: "登入成功" });
   } catch (err) {
+    logService.error(`登入時發生錯誤：${err instanceof Error ? err.message : String(err)}`);
     return res.status(500).json({ status: "error", message: "伺服器錯誤，請稍後再試" });
   }
 };
@@ -118,6 +119,7 @@ exports.refreshAccessToken = async (req, res) => {
       message: "Access Token 已被更新",
     });
   } catch (err) {
+    logService.error(`登出時撤銷 Token 失敗：${err instanceof Error ? err.message : String(err)}`);
     return res.status(403).json({
       status: "error",
       message: err.message,

@@ -16,6 +16,7 @@ exports.verifyAccessToken = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (err) {
+    logService.error(`JWT 驗證失敗：${err instanceof Error ? err.message : String(err)}`);
     return res.status(403).json({
       status: "error",
       message: "未授權：Token無效",

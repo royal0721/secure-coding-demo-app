@@ -3,7 +3,8 @@ const db = require("../config/db");
 const Post = {
   // 取得特定貼文
   findById: async (id) => {
-    const [rows] = await db.query('SELECT * FROM posts WHERE id = ?', [id]);
+    const query = "SELECT * FROM posts WHERE id = ?";
+    const [rows] = await db.query(query, [id]);
     return rows[0] || null;
   },
 
@@ -21,6 +22,7 @@ const Post = {
 
     const postId = result.insertId;
 
+    // 此處新增 select posts
     const selectQuery = "SELECT * FROM posts WHERE id = ?";
     const [rows] = await db.query(selectQuery, [postId]);
 
