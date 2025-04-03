@@ -39,8 +39,8 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         args: >
-          - Dsonar.organization=royal0721
-          - Dsonar.projectKey=secure-coding-demo-app
+          -Dsonar.organization=royal0721
+          -Dsonar.projectKey=secure-coding-demo-app
 
         
             
