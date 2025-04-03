@@ -14,6 +14,7 @@ https://github.com/royal0721/secure-coding-demo-app/wiki/DB-Queries-for-Setup
 
 - Reference for : `.env.development` & `.env.production`
 
+https://github.com/royal0721/secure-coding-demo-app/wiki/Set-up-the-enviroment-files
 
 
 ## Set the nginx config:
