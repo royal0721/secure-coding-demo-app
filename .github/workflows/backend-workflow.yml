@@ -41,7 +41,6 @@ jobs:
         args: >
           - Dsonar.organization=royal0721
           - Dsonar.projectKey=secure-coding-demo-app
-No tags
 
         
             
