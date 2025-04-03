@@ -8,11 +8,11 @@ https://github.com/royal0721/secure-coding-demo-app/wiki/DB-Queries-for-Setup
 
 ### 2. Add environment files:
 
-- Add `.env.development`、`.env.production`
+Add `.env.development`、`.env.production`
 
 ![image](https://github.com/user-attachments/assets/20e4bd3a-ba22-46c4-9d13-7b2fe282582f)
 
-- Reference for : `.env.development` & `.env.production`
+Reference for : `.env.development` & `.env.production`
 
 https://github.com/royal0721/secure-coding-demo-app/wiki/Set-up-the-enviroment-files
 
