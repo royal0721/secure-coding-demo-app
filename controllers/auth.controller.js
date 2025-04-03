@@ -139,6 +139,7 @@ exports.revokeRefreshToken = async (req, res) => {
       message: "登出成功",
     });
   } catch (err) {
+    logService.error('撤銷 Refresh Token 時發生錯誤', err);
     return res.status(500).json({
       status: "error",
       message: "撤銷Token失敗",

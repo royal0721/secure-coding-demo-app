@@ -1,6 +1,8 @@
 const { body, validationResult } = require("express-validator");
 
 const Post = require("../models/post");
+const logService = require("../services/log.service");
+
 
 const postsController = {
   // 取得特定貼文
@@ -58,6 +60,7 @@ const postsController = {
         const { id, createdAt } = await Post.create(name);
         return res.status(201).json({ status: "success", message: "建立貼文成功", id, name, createdAt });
       } catch (err) {
+        logService.error('建立貼文時發生錯誤', err);
         return res.status(500).json({ status: "error", message: "建立貼文失敗" });
       }
     },
@@ -81,6 +84,7 @@ const postsController = {
 
       return res.status(200).json({ status: "success", message: "貼文成功被更新" });
     } catch (err) {
+      logService.error('更新貼文時發生錯誤', err);
       return res.status(500).json({ status: "error", message: "更新貼文失敗" });
     }
   },
@@ -98,6 +102,7 @@ const postsController = {
 
       return res.status(200).json({ status: "success", message: "貼文已成功刪除" });
     } catch (err) {
+      logService.error('刪除貼文時發生錯誤', err);
       return res.status(500).json({ status: "success", message: "刪除貼文失敗" });
     }
   },

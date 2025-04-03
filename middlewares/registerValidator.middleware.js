@@ -13,7 +13,7 @@ exports.registerValidator = [
     .matches(/^(?=.*[a-z])/, "i").withMessage('密碼需包含小寫字母').bail()
     .matches(/^(?=.*[A-Z])/, "i").withMessage('密碼需包含大寫字母').bail()
     .matches(/^(?=.*\d)/).withMessage('密碼需包含數字').bail()
-    .matches(/^(?=.*[!@#$%^&*(),.?":{}|<>_\-\\\/\[\]`~+=;'])/).withMessage('密碼需包含特殊符號').bail(),
+    .matches(/^(?=.*[!@#$%^&*(),.?":{}|<>_\-/[\]~+=;'])/).withMessage('密碼需包含特殊符號').bail(),
 
   body('roleId')
     .optional()

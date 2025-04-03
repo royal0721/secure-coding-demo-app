@@ -1,6 +1,7 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const config = require("../config");
+const logService = require("../services/log.service");
 
 exports.verifyAccessToken = (req, res, next) => {
   const token = req.signedCookies[config.accessToken.cookieName];
