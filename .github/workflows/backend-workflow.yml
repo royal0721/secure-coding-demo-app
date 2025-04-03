@@ -40,7 +40,7 @@ jobs:
       with:
         args: >
           -Dsonar.organization=royal0721
-          -Dsonar.projectKey=secure-coding-demo-app
+          -Dsonar.projectKey=royal0721_secure-coding-demo-app
 
         
             
