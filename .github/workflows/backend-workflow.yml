@@ -52,10 +52,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.organization=royal0721
-            -Dsonar.projectKey=royal0721_secure-coding-demo-app
 
         
             
