@@ -10,7 +10,7 @@ const logFormat = format.combine(
 );
 // 創建Logger實例
 const logger = createLogger({
-  // 默認級別為info
+  // 預設級別為info
   level: process.env.LOG_LEVEL || "info",
   format: logFormat,
   transports: [
