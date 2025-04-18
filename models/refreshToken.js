@@ -1,4 +1,4 @@
-const db = require("../config/db"); // 假設 db 是 mysql2 的連線實例
+const db = require("../config/db"); 
 const { v4: uuidv4 } = require("uuid");
 
 const RefreshToken = {
