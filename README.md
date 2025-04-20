@@ -23,6 +23,10 @@ https://github.com/royal0721/secure-coding-demo-app/wiki/Nginx-Config-for-Setup
 ### Notes: 
 When running Nginx, make sure you don't have multiple instances running. If you do, you might encounter issues like receiving a 404 error when accessing your API.
 
+## Optional [For those who don't want to set up Nginx]
+If you don't want to use Nginx and simply want to bundle your frontend static files together into a single directory, you can try setting it up manually as well.
+
+
 
 
 
